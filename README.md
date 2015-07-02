@@ -9,7 +9,6 @@
 ## Table of Contents
 
   1. [Types](#types)
-  1. [References](#references)
   1. [Objects](#objects)
   1. [Arrays](#arrays)
   1. [Destructuring](#destructuring)
@@ -56,8 +55,8 @@
     + `undefined`
 
     ```javascript
-    const foo = 1;
-    let bar = foo;
+    var foo = 1;
+    var bar = foo;
 
     bar = 9;
 
@@ -70,60 +69,12 @@
     + `function`
 
     ```javascript
-    const foo = [1, 2];
-    const bar = foo;
+    var foo = [1, 2];
+    var bar = foo;
 
     bar[0] = 9;
 
     console.log(foo[0], bar[0]); // => 9, 9
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-## References
-
-  - [2.1](#2.1) <a name='2.1'></a> Use `const` for all of your references; avoid using `var`.
-
-  > Why? This ensures that you can't reassign your references (mutation), which can lead to bugs and difficult to comprehend code.
-
-    ```javascript
-    // bad
-    var a = 1;
-    var b = 2;
-
-    // good
-    const a = 1;
-    const b = 2;
-    ```
-
-  - [2.2](#2.2) <a name='2.2'></a> If you must mutate references, use `let` instead of `var`.
-
-  > Why? `let` is block-scoped rather than function-scoped like `var`.
-
-    ```javascript
-    // bad
-    var count = 1;
-    if (true) {
-      count += 1;
-    }
-
-    // good, use the let.
-    let count = 1;
-    if (true) {
-      count += 1;
-    }
-    ```
-
-  - [2.3](#2.3) <a name='2.3'></a> Note that both `let` and `const` are block-scoped.
-
-    ```javascript
-    // const and let only exist in the blocks they are defined in.
-    {
-      let a = 1;
-      const b = 1;
-    }
-    console.log(a); // ReferenceError
-    console.log(b); // ReferenceError
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -134,23 +85,23 @@
 
     ```javascript
     // bad
-    const item = new Object();
+    var item = new Object();
 
     // good
-    const item = {};
+    var item = {};
     ```
 
   - [3.2](#3.2) <a name='3.2'></a> If your code will be executed in browsers in script context, don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61). It’s OK to use them in ES6 modules and server-side code.
 
     ```javascript
     // bad
-    const superman = {
+    var superman = {
       default: { clark: 'kent' },
       private: true,
     };
 
     // good
-    const superman = {
+    var superman = {
       defaults: { clark: 'kent' },
       hidden: true,
     };
@@ -160,17 +111,17 @@
 
     ```javascript
     // bad
-    const superman = {
+    var superman = {
       class: 'alien',
     };
 
     // bad
-    const superman = {
+    var superman = {
       klass: 'alien',
     };
 
     // good
-    const superman = {
+    var superman = {
       type: 'alien',
     };
     ```
@@ -187,14 +138,14 @@
     }
 
     // bad
-    const obj = {
+    var obj = {
       id: 5,
       name: 'San Francisco',
     };
     obj[getKey('enabled')] = true;
 
     // good
-    const obj = {
+    var obj = {
       id: 5,
       name: 'San Francisco',
       [getKey('enabled')]: true,
@@ -206,7 +157,7 @@
 
     ```javascript
     // bad
-    const atom = {
+    var atom = {
       value: 1,
 
       addValue: function (value) {
@@ -215,7 +166,7 @@
     };
 
     // good
-    const atom = {
+    var atom = {
       value: 1,
 
       addValue(value) {
@@ -230,15 +181,15 @@
   > Why? It is shorter to write and descriptive.
 
     ```javascript
-    const lukeSkywalker = 'Luke Skywalker';
+    var lukeSkywalker = 'Luke Skywalker';
 
     // bad
-    const obj = {
+    var obj = {
       lukeSkywalker: lukeSkywalker,
     };
 
     // good
-    const obj = {
+    var obj = {
       lukeSkywalker,
     };
     ```
@@ -248,11 +199,11 @@
   > Why? It's easier to tell which properties are using the shorthand.
 
     ```javascript
-    const anakinSkywalker = 'Anakin Skywalker';
-    const lukeSkywalker = 'Luke Skywalker';
+    var anakinSkywalker = 'Anakin Skywalker';
+    var lukeSkywalker = 'Luke Skywalker';
 
     // bad
-    const obj = {
+    var obj = {
       episodeOne: 1,
       twoJedisWalkIntoACantina: 2,
       lukeSkywalker,
@@ -262,7 +213,7 @@
     };
 
     // good
-    const obj = {
+    var obj = {
       lukeSkywalker,
       anakinSkywalker,
       episodeOne: 1,
@@ -280,16 +231,16 @@
 
     ```javascript
     // bad
-    const items = new Array();
+    var items = new Array();
 
     // good
-    const items = [];
+    var items = [];
     ```
 
   - [4.2](#4.2) <a name='4.2'></a> Use Array#push instead of direct assignment to add items to an array.
 
     ```javascript
-    const someStack = [];
+    var someStack = [];
 
 
     // bad
@@ -304,8 +255,8 @@
 
     ```javascript
     // bad
-    const len = items.length;
-    const itemsCopy = [];
+    var len = items.length;
+    var itemsCopy = [];
     let i;
 
     for (i = 0; i < len; i++) {
@@ -313,13 +264,13 @@
     }
 
     // good
-    const itemsCopy = [...items];
+    var itemsCopy = [...items];
     ```
   - [4.4](#4.4) <a name='4.4'></a> To convert an array-like object to an array, use Array#from.
 
     ```javascript
-    const foo = document.querySelectorAll('.foo');
-    const nodes = Array.from(foo);
+    var foo = document.querySelectorAll('.foo');
+    var nodes = Array.from(foo);
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -333,15 +284,15 @@
     ```javascript
     // bad
     function getFullName(user) {
-      const firstName = user.firstName;
-      const lastName = user.lastName;
+      var firstName = user.firstName;
+      var lastName = user.lastName;
 
       return `${firstName} ${lastName}`;
     }
 
     // good
     function getFullName(obj) {
-      const { firstName, lastName } = obj;
+      var { firstName, lastName } = obj;
       return `${firstName} ${lastName}`;
     }
 
@@ -354,14 +305,14 @@
   - [5.2](#5.2) <a name='5.2'></a> Use array destructuring.
 
     ```javascript
-    const arr = [1, 2, 3, 4];
+    var arr = [1, 2, 3, 4];
 
     // bad
-    const first = arr[0];
-    const second = arr[1];
+    var first = arr[0];
+    var second = arr[1];
 
     // good
-    const [first, second] = arr;
+    var [first, second] = arr;
     ```
 
   - [5.3](#5.3) <a name='5.3'></a> Use object destructuring for multiple return values, not array destructuring.
@@ -376,7 +327,7 @@
     }
 
     // the caller needs to think about the order of return data
-    const [left, __, top] = processInput(input);
+    var [left, __, top] = processInput(input);
 
     // good
     function processInput(input) {
@@ -385,7 +336,7 @@
     }
 
     // the caller selects only the data they need
-    const { left, right } = processInput(input);
+    var { left, right } = processInput(input);
     ```
 
 
@@ -397,10 +348,10 @@
 
     ```javascript
     // bad
-    const name = "Capt. Janeway";
+    var name = "Capt. Janeway";
 
     // good
-    const name = 'Capt. Janeway';
+    var name = 'Capt. Janeway';
     ```
 
   - [6.2](#6.2) <a name='6.2'></a> Strings longer than 80 characters should be written across multiple lines using string concatenation.
@@ -408,16 +359,16 @@
 
     ```javascript
     // bad
-    const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
     // bad
-    const errorMessage = 'This is a super long error that was thrown because \
+    var errorMessage = 'This is a super long error that was thrown because \
     of Batman. When you stop to think about how Batman had anything to do \
     with this, you would get nowhere \
     fast.';
 
     // good
-    const errorMessage = 'This is a super long error that was thrown because ' +
+    var errorMessage = 'This is a super long error that was thrown because ' +
       'of Batman. When you stop to think about how Batman had anything to do ' +
       'with this, you would get nowhere fast.';
     ```
@@ -455,7 +406,7 @@
 
     ```javascript
     // bad
-    const foo = function () {
+    var foo = function () {
     };
 
     // good
@@ -514,7 +465,7 @@
     ```javascript
     // bad
     function concatenateAll() {
-      const args = Array.prototype.slice.call(arguments);
+      var args = Array.prototype.slice.call(arguments);
       return args.join('');
     }
 
@@ -621,7 +572,7 @@
       this._queue = [...contents];
     }
     Queue.prototype.pop = function() {
-      const value = this._queue[0];
+      var value = this._queue[0];
       this._queue.splice(0, 1);
       return value;
     }
@@ -633,7 +584,7 @@
         this._queue = [...contents];
       }
       pop() {
-        const value = this._queue[0];
+        var value = this._queue[0];
         this._queue.splice(0, 1);
         return value;
       }
@@ -646,7 +597,7 @@
 
     ```javascript
     // bad
-    const inherits = require('inherits');
+    var inherits = require('inherits');
     function PeekableQueue(contents) {
       Queue.apply(this, contents);
     }
@@ -676,7 +627,7 @@
       this.height = height;
     };
 
-    const luke = new Jedi();
+    var luke = new Jedi();
     luke.jump(); // => true
     luke.setHeight(20); // => undefined
 
@@ -693,7 +644,7 @@
       }
     }
 
-    const luke = new Jedi();
+    var luke = new Jedi();
 
     luke.jump()
       .setHeight(20);
@@ -729,7 +680,7 @@
 
     ```javascript
     // bad
-    const AirbnbStyleGuide = require('./AirbnbStyleGuide');
+    var AirbnbStyleGuide = require('./AirbnbStyleGuide');
     module.exports = AirbnbStyleGuide.es6;
 
     // ok
@@ -777,7 +728,7 @@
   > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side-effects.
 
     ```javascript
-    const numbers = [1, 2, 3, 4, 5];
+    var numbers = [1, 2, 3, 4, 5];
 
     // bad
     let sum = 0;
@@ -793,7 +744,7 @@
     sum === 15;
 
     // best (use the functional force)
-    const sum = numbers.reduce((total, num) => total + num, 0);
+    var sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
     ```
 
@@ -809,22 +760,22 @@
   - [12.1](#12.1) <a name='12.1'></a> Use dot notation when accessing properties.
 
     ```javascript
-    const luke = {
+    var luke = {
       jedi: true,
       age: 28,
     };
 
     // bad
-    const isJedi = luke['jedi'];
+    var isJedi = luke['jedi'];
 
     // good
-    const isJedi = luke.jedi;
+    var isJedi = luke.jedi;
     ```
 
   - [12.2](#12.2) <a name='12.2'></a> Use subscript notation `[]` when accessing properties with a variable.
 
     ```javascript
-    const luke = {
+    var luke = {
       jedi: true,
       age: 28,
     };
@@ -833,7 +784,7 @@
       return luke[prop];
     }
 
-    const isJedi = getProp('jedi');
+    var isJedi = getProp('jedi');
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -848,7 +799,7 @@
     superPower = new SuperPower();
 
     // good
-    const superPower = new SuperPower();
+    var superPower = new SuperPower();
     ```
 
   - [13.2](#13.2) <a name='13.2'></a> Use one `const` declaration per variable.
@@ -857,20 +808,20 @@
 
     ```javascript
     // bad
-    const items = getItems(),
+    var items = getItems(),
         goSportsTeam = true,
         dragonball = 'z';
 
     // bad
     // (compare to above, and try to spot the mistake)
-    const items = getItems(),
+    var items = getItems(),
         goSportsTeam = true;
         dragonball = 'z';
 
     // good
-    const items = getItems();
-    const goSportsTeam = true;
-    const dragonball = 'z';
+    var items = getItems();
+    var goSportsTeam = true;
+    var dragonball = 'z';
     ```
 
   - [13.3](#13.3) <a name='13.3'></a> Group all your `const`s and then group all your `let`s.
@@ -885,14 +836,14 @@
 
     // bad
     let i;
-    const items = getItems();
+    var items = getItems();
     let dragonball;
-    const goSportsTeam = true;
+    var goSportsTeam = true;
     let len;
 
     // good
-    const goSportsTeam = true;
-    const items = getItems();
+    var goSportsTeam = true;
+    var items = getItems();
     let dragonball;
     let i;
     let length;
@@ -910,7 +861,7 @@
 
       //..other stuff..
 
-      const name = getName();
+      var name = getName();
 
       if (name === 'test') {
         return false;
@@ -921,7 +872,7 @@
 
     // bad - unnessary function call
     function(hasName) {
-      const name = getName();
+      var name = getName();
 
       if (!hasName) {
         return false;
@@ -938,7 +889,7 @@
         return false;
       }
 
-      const name = getName();
+      var name = getName();
       this.setFirstName(name);
 
       return true;
@@ -977,11 +928,11 @@
       declaredButNotAssigned = true;
     }
 
-    // using const and let
+    // using var and let
     function example() {
       console.log(declaredButNotAssigned); // => throws a ReferenceError
       console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
-      const declaredButNotAssigned = true;
+      var declaredButNotAssigned = true;
     }
     ```
 
@@ -1182,17 +1133,17 @@
 
     ```javascript
     // bad
-    const active = true;  // is current tab
+    var active = true;  // is current tab
 
     // good
     // is current tab
-    const active = true;
+    var active = true;
 
     // bad
     function getType() {
       console.log('fetching type...');
       // set the default type to 'no type'
-      const type = this._type || 'no type';
+      var type = this._type || 'no type';
 
       return type;
     }
@@ -1202,7 +1153,7 @@
       console.log('fetching type...');
 
       // set the default type to 'no type'
-      const type = this._type || 'no type';
+      var type = this._type || 'no type';
 
       return type;
     }
@@ -1242,17 +1193,17 @@
     ```javascript
     // bad
     function() {
-    ∙∙∙∙const name;
+    ∙∙∙∙var name;
     }
 
     // bad
     function() {
-    ∙const name;
+    ∙var name;
     }
 
     // good
     function() {
-    ∙∙const name;
+    ∙∙var name;
     }
     ```
 
@@ -1310,10 +1261,10 @@
 
     ```javascript
     // bad
-    const x=y+5;
+    var x=y+5;
 
     // good
-    const x = y + 5;
+    var x = y + 5;
     ```
 
   - [18.5](#18.5) <a name='18.5'></a> End files with a single newline character.
@@ -1364,13 +1315,13 @@
         .updateCount();
 
     // bad
-    const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').class('led', true)
+    var leds = stage.selectAll('.led').data(data).enter().append('svg:svg').class('led', true)
         .attr('width', (radius + margin) * 2).append('svg:g')
         .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
 
     // good
-    const leds = stage.selectAll('.led')
+    var leds = stage.selectAll('.led')
         .data(data)
       .enter().append('svg:svg')
         .classed('led', true)
@@ -1397,7 +1348,7 @@
     return baz;
 
     // bad
-    const obj = {
+    var obj = {
       foo() {
       },
       bar() {
@@ -1406,7 +1357,7 @@
     return obj;
 
     // good
-    const obj = {
+    var obj = {
       foo() {
       },
 
@@ -1426,21 +1377,21 @@
 
     ```javascript
     // bad
-    const story = [
+    var story = [
         once
       , upon
       , aTime
     ];
 
     // good
-    const story = [
+    var story = [
       once,
       upon,
       aTime,
     ];
 
     // bad
-    const hero = {
+    var hero = {
         firstName: 'Ada'
       , lastName: 'Lovelace'
       , birthYear: 1815
@@ -1448,7 +1399,7 @@
     };
 
     // good
-    const hero = {
+    var hero = {
       firstName: 'Ada',
       lastName: 'Lovelace',
       birthYear: 1815,
@@ -1462,7 +1413,7 @@
 
     ```javascript
     // bad - git diff without trailing comma
-    const hero = {
+    var hero = {
          firstName: 'Florence',
     -    lastName: 'Nightingale'
     +    lastName: 'Nightingale',
@@ -1470,30 +1421,30 @@
     }
 
     // good - git diff with trailing comma
-    const hero = {
+    var hero = {
          firstName: 'Florence',
          lastName: 'Nightingale',
     +    inventorOf: ['coxcomb chart', 'mordern nursing'],
     }
 
     // bad
-    const hero = {
+    var hero = {
       firstName: 'Dana',
       lastName: 'Scully'
     };
 
-    const heroes = [
+    var heroes = [
       'Batman',
       'Superman'
     ];
 
     // good
-    const hero = {
+    var hero = {
       firstName: 'Dana',
       lastName: 'Scully',
     };
 
-    const heroes = [
+    var heroes = [
       'Batman',
       'Superman',
     ];
@@ -1509,19 +1460,19 @@
     ```javascript
     // bad
     (function() {
-      const name = 'Skywalker'
+      var name = 'Skywalker'
       return name
     })()
 
     // good
     (() => {
-      const name = 'Skywalker';
+      var name = 'Skywalker';
       return name;
     })();
 
     // good (guards against the function becoming an argument when two files with IIFEs are concatenated)
     ;(() => {
-      const name = 'Skywalker';
+      var name = 'Skywalker';
       return name;
     })();
     ```
@@ -1540,34 +1491,34 @@
     //  => this.reviewScore = 9;
 
     // bad
-    const totalScore = this.reviewScore + '';
+    var totalScore = this.reviewScore + '';
 
     // good
-    const totalScore = String(this.reviewScore);
+    var totalScore = String(this.reviewScore);
     ```
 
   - [21.3](#21.3) <a name='21.3'></a> Use `parseInt` for Numbers and always with a radix for type casting.
 
     ```javascript
-    const inputValue = '4';
+    var inputValue = '4';
 
     // bad
-    const val = new Number(inputValue);
+    var val = new Number(inputValue);
 
     // bad
-    const val = +inputValue;
+    var val = +inputValue;
 
     // bad
-    const val = inputValue >> 0;
+    var val = inputValue >> 0;
 
     // bad
-    const val = parseInt(inputValue);
+    var val = parseInt(inputValue);
 
     // good
-    const val = Number(inputValue);
+    var val = Number(inputValue);
 
     // good
-    const val = parseInt(inputValue, 10);
+    var val = parseInt(inputValue, 10);
     ```
 
   - [21.4](#21.4) <a name='21.4'></a> If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](http://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you're doing.
@@ -1579,7 +1530,7 @@
      * Bitshifting the String to coerce it to a
      * Number made it a lot faster.
      */
-    const val = inputValue >> 0;
+    var val = inputValue >> 0;
     ```
 
   - [21.5](#21.5) <a name='21.5'></a> **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
@@ -1593,16 +1544,16 @@
   - [21.6](#21.6) <a name='21.6'></a> Booleans:
 
     ```javascript
-    const age = 0;
+    var age = 0;
 
     // bad
-    const hasAge = new Boolean(age);
+    var hasAge = new Boolean(age);
 
     // good
-    const hasAge = Boolean(age);
+    var hasAge = Boolean(age);
 
     // good
-    const hasAge = !!age;
+    var hasAge = !!age;
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -1628,12 +1579,12 @@
 
     ```javascript
     // bad
-    const OBJEcttsssss = {};
-    const this_is_my_object = {};
+    var OBJEcttsssss = {};
+    var this_is_my_object = {};
     function c() {}
 
     // good
-    const thisIsMyObject = {};
+    var thisIsMyObject = {};
     function thisIsMyFunction() {}
     ```
 
@@ -1645,7 +1596,7 @@
       this.name = options.name;
     }
 
-    const bad = new user({
+    var bad = new user({
       name: 'nope',
     });
 
@@ -1656,7 +1607,7 @@
       }
     }
 
-    const good = new User({
+    var good = new User({
       name: 'yup',
     });
     ```
@@ -1677,7 +1628,7 @@
     ```javascript
     // bad
     function foo() {
-      const self = this;
+      var self = this;
       return function() {
         console.log(self);
       };
@@ -1685,7 +1636,7 @@
 
     // bad
     function foo() {
-      const that = this;
+      var that = this;
       return function() {
         console.log(that);
       };
@@ -1730,7 +1681,7 @@
   - [22.8](#22.8) <a name='22.8'></a> Use PascalCase when you export a singleton / function library / bare object.
 
     ```javascript
-    const AirbnbStyleGuide = {
+    var AirbnbStyleGuide = {
       es6: {
       }
     };
@@ -1780,7 +1731,7 @@
     ```javascript
     class Jedi {
       constructor(options = {}) {
-        const lightsaber = options.lightsaber || 'blue';
+        var lightsaber = options.lightsaber || 'blue';
         this.set('lightsaber', lightsaber);
       }
 
@@ -1834,10 +1785,10 @@
 
     ```javascript
     // bad
-    const sidebar = $('.sidebar');
+    var sidebar = $('.sidebar');
 
     // good
-    const $sidebar = $('.sidebar');
+    var $sidebar = $('.sidebar');
     ```
 
   - [25.2](#25.2) <a name='25.2'></a> Cache jQuery lookups.
@@ -1856,7 +1807,7 @@
 
     // good
     function setSidebar() {
-      const $sidebar = $('.sidebar');
+      var $sidebar = $('.sidebar');
       $sidebar.hide();
 
       // ...stuff...
